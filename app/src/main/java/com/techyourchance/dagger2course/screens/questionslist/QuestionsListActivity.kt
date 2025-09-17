@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.techyourchance.dagger2course.Constants
 import com.techyourchance.dagger2course.networking.StackoverflowApi
+import com.techyourchance.dagger2course.questions.FetchQuestionUseCase
 import com.techyourchance.dagger2course.questions.Question
 import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.techyourchance.dagger2course.screens.questiondetails.QuestionDetailsActivity
@@ -16,26 +17,20 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-
-    private lateinit var stackoverflowApi: StackoverflowApi
-
     private lateinit var viewMvc: QuestionsListViewMvc
 
     private var isDataLoaded = false
 
+    private lateinit var fetchQuestionUseCase: FetchQuestionUseCase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewMvc = QuestionsListViewMvc(LayoutInflater.from(this),null)
+        viewMvc = QuestionsListViewMvc(LayoutInflater.from(this), null)
+
+        fetchQuestionUseCase = FetchQuestionUseCase()
 
         setContentView(viewMvc.rootView)
-
-        // init retrofit
-        val retrofit = Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        stackoverflowApi = retrofit.create(StackoverflowApi::class.java)
     }
 
     override fun onStart() {
@@ -56,27 +51,26 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         coroutineScope.launch {
             viewMvc.showProgressIndication()
             try {
-                val response = stackoverflowApi.lastActiveQuestions(20)
-                if (response.isSuccessful && response.body() != null) {
-                    viewMvc.bindQuestions(response.body()!!.questions)
-                    isDataLoaded = true
-                } else {
-                    onFetchFailed()
-                }
-            } catch (t: Throwable) {
-                if (t !is CancellationException) {
-                    onFetchFailed()
+                val result = fetchQuestionUseCase.fetchLatestQuestions()
+                when (result) {
+                    is FetchQuestionUseCase.Result.Success -> {
+                        viewMvc.bindQuestions(result.questions)
+                        isDataLoaded = true
+                    }
+
+                    is FetchQuestionUseCase.Result.Failure -> onFetchFailed()
                 }
             } finally {
                 viewMvc.hideProgressIndication()
             }
+
         }
     }
 
     private fun onFetchFailed() {
         supportFragmentManager.beginTransaction()
-                .add(ServerErrorDialogFragment.newInstance(), null)
-                .commitAllowingStateLoss()
+            .add(ServerErrorDialogFragment.newInstance(), null)
+            .commitAllowingStateLoss()
     }
 
     override fun onRefreshClicked() {
