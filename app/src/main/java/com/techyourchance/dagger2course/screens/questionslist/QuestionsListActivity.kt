@@ -7,6 +7,7 @@ import com.techyourchance.dagger2course.Constants
 import com.techyourchance.dagger2course.networking.StackoverflowApi
 import com.techyourchance.dagger2course.questions.FetchQuestionUseCase
 import com.techyourchance.dagger2course.questions.Question
+import com.techyourchance.dagger2course.screens.common.ScreensNavigator
 import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.techyourchance.dagger2course.screens.questiondetails.QuestionDetailsActivity
@@ -25,6 +26,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
     private lateinit var fetchQuestionUseCase: FetchQuestionUseCase
 
     private lateinit var dialogsNavigator: DialogsNavigator
+    private lateinit var screensNavigator: ScreensNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +36,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         fetchQuestionUseCase = FetchQuestionUseCase()
 
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
+        screensNavigator = ScreensNavigator(this)
 
         setContentView(viewMvc.rootView)
     }
@@ -81,6 +84,6 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
     }
 
     override fun onQuestionClicked(clickedQuestion: Question) {
-        QuestionDetailsActivity.start(this, clickedQuestion.id)
+        screensNavigator.toQuestionDetails(clickedQuestion.id)
     }
 }

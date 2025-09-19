@@ -13,6 +13,7 @@ import com.techyourchance.dagger2course.Constants
 import com.techyourchance.dagger2course.R
 import com.techyourchance.dagger2course.networking.StackoverflowApi
 import com.techyourchance.dagger2course.questions.FetchQuestionDetailsUseCase
+import com.techyourchance.dagger2course.screens.common.ScreensNavigator
 import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.techyourchance.dagger2course.screens.common.toolbar.MyToolbar
@@ -33,6 +34,8 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsListMvc.List
 
     private lateinit var dialogsNavigator: DialogsNavigator
 
+    private lateinit var screensNavigator: ScreensNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,6 +48,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsListMvc.List
         fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase(questionId)
 
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
+        screensNavigator = ScreensNavigator(this)
     }
 
     override fun onStart() {
@@ -92,6 +96,6 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsListMvc.List
     }
 
     override fun onBack() {
-        onBackPressed()
+        screensNavigator.navigateBack()
     }
 }
