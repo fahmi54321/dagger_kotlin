@@ -13,6 +13,7 @@ import com.techyourchance.dagger2course.Constants
 import com.techyourchance.dagger2course.R
 import com.techyourchance.dagger2course.networking.StackoverflowApi
 import com.techyourchance.dagger2course.questions.FetchQuestionDetailsUseCase
+import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.techyourchance.dagger2course.screens.common.toolbar.MyToolbar
 import kotlinx.coroutines.*
@@ -30,6 +31,8 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsListMvc.List
 
     private lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
 
+    private lateinit var dialogsNavigator: DialogsNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,6 +43,8 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsListMvc.List
         questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
 
         fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase(questionId)
+
+        dialogsNavigator = DialogsNavigator(supportFragmentManager)
     }
 
     override fun onStart() {
@@ -74,9 +79,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsListMvc.List
     }
 
     private fun onFetchFailed() {
-        supportFragmentManager.beginTransaction()
-                .add(ServerErrorDialogFragment.newInstance(), null)
-                .commitAllowingStateLoss()
+        dialogsNavigator.showServerErrorDialog()
     }
 
     companion object {
