@@ -46,7 +46,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsListMvc.List
         // retrieve question ID passed from outside
         questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
 
-        fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase(questionId,((application as MyApplication).stackoverflowApi))
+        fetchQuestionDetailsUseCase = (application as MyApplication).fetchQuestionDetailsUseCase
 
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
         screensNavigator = ScreensNavigator(this)
@@ -69,7 +69,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsListMvc.List
         coroutineScope.launch {
             viewMvc.showProgressIndication()
             try {
-                val result = fetchQuestionDetailsUseCase.fetchQuestionDetails()
+                val result = fetchQuestionDetailsUseCase.fetchQuestionDetails(questionId)
                 when(result){
                     is FetchQuestionDetailsUseCase.Result.Success ->{
                         viewMvc.bindQuesionBody(result.body)

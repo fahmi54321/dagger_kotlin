@@ -8,14 +8,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.coroutines.cancellation.CancellationException
 
-class FetchQuestionDetailsUseCase(private val questionId: String, private val stackoverflowApi: StackoverflowApi) {
+class FetchQuestionDetailsUseCase(private val stackoverflowApi: StackoverflowApi) {
 
     sealed class Result {
         class Success(val body: String) : Result()
         object Failure : Result()
     }
 
-    suspend fun fetchQuestionDetails() : Result{
+    suspend fun fetchQuestionDetails(questionId: String) : Result{
         return withContext(Dispatchers.IO){
             try {
                 val response = stackoverflowApi.questionDetails(questionId)
