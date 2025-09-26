@@ -1,6 +1,7 @@
 package com.techyourchance.dagger2course.common.compisition
 
 import android.app.Activity
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.techyourchance.dagger2course.questions.FetchQuestionDetailsUseCase
@@ -17,6 +18,8 @@ class ActivityCompositionRoot(
     }
 
     private val fragmentManager get() = activity.supportFragmentManager
+
+    private val layoutInflater get() = LayoutInflater.from(activity)
 
     val dialogsNavigator get() = DialogsNavigator(fragmentManager)
 

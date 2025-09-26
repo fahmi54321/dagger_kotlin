@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.techyourchance.dagger2course.Constants
 import com.techyourchance.dagger2course.MyApplication
+import com.techyourchance.dagger2course.R
 import com.techyourchance.dagger2course.networking.StackoverflowApi
 import com.techyourchance.dagger2course.questions.FetchQuestionUseCase
 import com.techyourchance.dagger2course.questions.Question
@@ -17,75 +18,15 @@ import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class QuestionsListActivity : BaseActivity(), QuestionsListViewMvc.Listener {
-
-    private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
-
-    private lateinit var viewMvc: QuestionsListViewMvc
-
-    private var isDataLoaded = false
-
-    private lateinit var fetchQuestionUseCase: FetchQuestionUseCase
-
-    private lateinit var dialogsNavigator: DialogsNavigator
-    private lateinit var screensNavigator: ScreensNavigator
-
+class QuestionsListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.layout_frame)
 
-        viewMvc = QuestionsListViewMvc(LayoutInflater.from(this), null)
-
-        fetchQuestionUseCase = compositionRoot.fetchQuestionUseCase
-
-        dialogsNavigator = compositionRoot.dialogsNavigator
-        screensNavigator = compositionRoot.screensNavigator
-
-        setContentView(viewMvc.rootView)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewMvc.registerListener(this)
-        if (!isDataLoaded) {
-            fetchQuestions()
+        if(savedInstanceState == null){
+            supportFragmentManager.beginTransaction()
+                .add(R.id.frame_content, QuestionsListFragment())
+                .commit()
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewMvc.unregisterListener(this)
-        coroutineScope.coroutineContext.cancelChildren()
-    }
-
-    private fun fetchQuestions() {
-        coroutineScope.launch {
-            viewMvc.showProgressIndication()
-            try {
-                val result = fetchQuestionUseCase.fetchLatestQuestions()
-                when (result) {
-                    is FetchQuestionUseCase.Result.Success -> {
-                        viewMvc.bindQuestions(result.questions)
-                        isDataLoaded = true
-                    }
-
-                    is FetchQuestionUseCase.Result.Failure -> onFetchFailed()
-                }
-            } finally {
-                viewMvc.hideProgressIndication()
-            }
-
-        }
-    }
-
-    private fun onFetchFailed() {
-        dialogsNavigator.showServerErrorDialog()
-    }
-
-    override fun onRefreshClicked() {
-        fetchQuestions()
-    }
-
-    override fun onQuestionClicked(clickedQuestion: Question) {
-        screensNavigator.toQuestionDetails(clickedQuestion.id)
     }
 }
