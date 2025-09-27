@@ -18,17 +18,10 @@ class ActivityCompositionRoot(
         ScreensNavigator(activity)
     }
 
-    private val fragmentManager get() = activity.supportFragmentManager
+    val fragmentManager get() = activity.supportFragmentManager
 
-    private val layoutInflater get() = LayoutInflater.from(activity)
+    val layoutInflater get() = LayoutInflater.from(activity)
 
-    val viewMvcFactory get() = ViewMvcFactory(layoutInflater)
+    val stackoverflowApi get() = appCompisitionRoot.stackoverflowApi
 
-
-    val dialogsNavigator get() = DialogsNavigator(fragmentManager)
-
-    private val stackoverflowApi get() = appCompisitionRoot.stackoverflowApi
-
-    val fetchQuestionUseCase get() = FetchQuestionUseCase(stackoverflowApi)
-    val fetchQuestionDetailsUseCase get() = FetchQuestionDetailsUseCase(stackoverflowApi)
 }
