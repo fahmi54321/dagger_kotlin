@@ -19,73 +19,23 @@ import com.techyourchance.dagger2course.screens.common.activities.BaseActivity
 import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.techyourchance.dagger2course.screens.common.toolbar.MyToolbar
+import com.techyourchance.dagger2course.screens.questionslist.QuestionsListFragment
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class QuestionDetailsActivity : BaseActivity(), QuestionDetailsListMvc.Listener {
-
-    private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
-
-
-    private lateinit var questionId: String
-
-    private lateinit var viewMvc: QuestionDetailsListMvc
-
-    private lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
-
-    private lateinit var dialogsNavigator: DialogsNavigator
-
-    private lateinit var screensNavigator: ScreensNavigator
+class QuestionDetailsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewMvc = QuestionDetailsListMvc(LayoutInflater.from(this),null)
-        setContentView(viewMvc.rootView)
+        setContentView(R.layout.layout_frame)
 
-        // retrieve question ID passed from outside
-        questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
-
-        fetchQuestionDetailsUseCase = compositionRoot.fetchQuestionDetailsUseCase
-
-        dialogsNavigator = compositionRoot.dialogsNavigator
-        screensNavigator = compositionRoot.screensNavigator
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewMvc.registerListener(this)
-        fetchQuestionDetails()
-    }
-
-
-    override fun onStop() {
-        super.onStop()
-        viewMvc.unregisterListener(this)
-        coroutineScope.coroutineContext.cancelChildren()
-    }
-
-    private fun fetchQuestionDetails() {
-        coroutineScope.launch {
-            viewMvc.showProgressIndication()
-            try {
-                val result = fetchQuestionDetailsUseCase.fetchQuestionDetails(questionId)
-                when(result){
-                    is FetchQuestionDetailsUseCase.Result.Success ->{
-                        viewMvc.bindQuesionBody(result.body)
-                    }
-                    is FetchQuestionDetailsUseCase.Result.Failure -> onFetchFailed()
-                }
-            } finally {
-                viewMvc.hideProgressIndication()
-            }
-
+        if(savedInstanceState == null){
+            supportFragmentManager.beginTransaction()
+                .add(R.id.frame_content, QuestionDetailsFragment())
+                .commit()
         }
-    }
-
-    private fun onFetchFailed() {
-        dialogsNavigator.showServerErrorDialog()
     }
 
     companion object {
@@ -95,9 +45,5 @@ class QuestionDetailsActivity : BaseActivity(), QuestionDetailsListMvc.Listener 
             intent.putExtra(EXTRA_QUESTION_ID, questionId)
             context.startActivity(intent)
         }
-    }
-
-    override fun onBack() {
-        screensNavigator.navigateBack()
     }
 }
