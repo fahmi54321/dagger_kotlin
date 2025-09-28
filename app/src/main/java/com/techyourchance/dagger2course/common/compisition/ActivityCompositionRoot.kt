@@ -11,16 +11,18 @@ import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.techyourchance.dagger2course.screens.common.viewsmvc.ViewMvcFactory
 
 class ActivityCompositionRoot(
-    private val activity: AppCompatActivity,
+    val activity: AppCompatActivity,
     private val appCompisitionRoot: AppCompisitionRoot,
 ) {
     val screensNavigator by lazy {
         ScreensNavigator(activity)
     }
 
+    val application get() = appCompisitionRoot.application
+
     val fragmentManager get() = activity.supportFragmentManager
 
-    val layoutInflater get() = LayoutInflater.from(activity)
+    val layoutInflater get() = LayoutInflater.from(activity.applicationContext)
 
     val stackoverflowApi get() = appCompisitionRoot.stackoverflowApi
 
