@@ -15,6 +15,7 @@ import com.techyourchance.dagger2course.Constants
 import com.techyourchance.dagger2course.MyApplication
 import com.techyourchance.dagger2course.R
 import com.techyourchance.dagger2course.common.dependencyinjection.Injector
+import com.techyourchance.dagger2course.common.dependencyinjection.Service
 import com.techyourchance.dagger2course.networking.StackoverflowApi
 import com.techyourchance.dagger2course.questions.FetchQuestionDetailsUseCase
 import com.techyourchance.dagger2course.screens.common.ScreensNavigator
@@ -38,13 +39,13 @@ class QuestionDetailsFragment : BaseFragment(), QuestionDetailsListMvc.Listener 
 
     private lateinit var viewMvc: QuestionDetailsListMvc
 
-    lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
+    @field:Service private lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
 
-    lateinit var dialogsNavigator: DialogsNavigator
+    @field:Service private lateinit var dialogsNavigator: DialogsNavigator
 
-    lateinit var screensNavigator: ScreensNavigator
+    @field:Service private lateinit var screensNavigator: ScreensNavigator
 
-    lateinit var viewMvcFactory: ViewMvcFactory
+    @field:Service private lateinit var viewMvcFactory: ViewMvcFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
