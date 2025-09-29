@@ -1,7 +1,7 @@
 package com.techyourchance.dagger2course
 
 import android.app.Application
-import com.techyourchance.dagger2course.common.compisition.AppCompisitionRoot
+import com.techyourchance.dagger2course.common.dependencyinjection.AppCompisitionRoot
 
 class MyApplication: Application() {
 

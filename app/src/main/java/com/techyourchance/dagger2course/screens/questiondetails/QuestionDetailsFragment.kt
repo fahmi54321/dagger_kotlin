@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.techyourchance.dagger2course.Constants
 import com.techyourchance.dagger2course.MyApplication
 import com.techyourchance.dagger2course.R
+import com.techyourchance.dagger2course.common.dependencyinjection.Injector
 import com.techyourchance.dagger2course.networking.StackoverflowApi
 import com.techyourchance.dagger2course.questions.FetchQuestionDetailsUseCase
 import com.techyourchance.dagger2course.screens.common.ScreensNavigator
@@ -22,6 +23,7 @@ import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.techyourchance.dagger2course.screens.common.fragments.BaseFragment
 import com.techyourchance.dagger2course.screens.common.toolbar.MyToolbar
+import com.techyourchance.dagger2course.screens.common.viewsmvc.ViewMvcFactory
 import com.techyourchance.dagger2course.screens.questiondetails.QuestionDetailsActivity.Companion.EXTRA_QUESTION_ID
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
@@ -36,11 +38,13 @@ class QuestionDetailsFragment : BaseFragment(), QuestionDetailsListMvc.Listener 
 
     private lateinit var viewMvc: QuestionDetailsListMvc
 
-    private lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
+    lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
 
-    private lateinit var dialogsNavigator: DialogsNavigator
+    lateinit var dialogsNavigator: DialogsNavigator
 
-    private lateinit var screensNavigator: ScreensNavigator
+    lateinit var screensNavigator: ScreensNavigator
+
+    lateinit var viewMvcFactory: ViewMvcFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,18 +52,15 @@ class QuestionDetailsFragment : BaseFragment(), QuestionDetailsListMvc.Listener 
         // retrieve question ID passed from outside
         questionId = requireActivity().intent.extras!!.getString(EXTRA_QUESTION_ID)!!
 
-        fetchQuestionDetailsUseCase = compositionRoot.fetchQuestionDetailsUseCase
-
-        dialogsNavigator = compositionRoot.dialogsNavigator
-        screensNavigator = compositionRoot.screensNavigator
+        injector.inject(this)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        viewMvc = compositionRoot.viewMvcFactory.newQuestionDetailsListMvc(container)
+    ): View {
+        viewMvc = viewMvcFactory.newQuestionDetailsListMvc(container)
         return viewMvc.rootView
     }
 
