@@ -1,20 +1,39 @@
 package com.techyourchance.dagger2course.common.dependencyinjection
 
+import android.view.LayoutInflater
+import androidx.fragment.app.FragmentManager
+import com.techyourchance.dagger2course.networking.StackoverflowApi
 import com.techyourchance.dagger2course.questions.FetchQuestionDetailsUseCase
 import com.techyourchance.dagger2course.questions.FetchQuestionUseCase
 import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.techyourchance.dagger2course.screens.common.viewsmvc.ViewMvcFactory
+import dagger.Module
+import dagger.Provides
 
-class PresentationCompositionRoot(private val activityCompositionRoot: ActivityCompositionRoot) {
+@Module
+class PresentationModule(private val activityCompositionRoot: ActivityCompositionRoot) {
 
-    private val layoutInflater get() = activityCompositionRoot.layoutInflater
-    private val fragmentManager get() = activityCompositionRoot.fragmentManager
-    private val stackoverflowApi get() = activityCompositionRoot.stackoverflowApi
-    private val activity get() = activityCompositionRoot.activity
+    @Provides
+    fun layoutInflater() = activityCompositionRoot.layoutInflater
+    @Provides
+    fun fragmentManager() = activityCompositionRoot.fragmentManager
+    @Provides
+    fun stackoverflowApi() = activityCompositionRoot.stackoverflowApi
+    @Provides
+    fun activity() = activityCompositionRoot.activity
 
-    val viewMvcFactory get() = ViewMvcFactory(layoutInflater)
-    val dialogsNavigator get() = DialogsNavigator(fragmentManager)
-    val screensNavigator get() = activityCompositionRoot.screensNavigator
-    val fetchQuestionUseCase get() = FetchQuestionUseCase(stackoverflowApi)
-    val fetchQuestionDetailsUseCase get() = FetchQuestionDetailsUseCase(stackoverflowApi)
+    @Provides
+    fun screensNavigator() = activityCompositionRoot.screensNavigator
+
+    @Provides
+    fun viewMvcFactory(layoutInflater: LayoutInflater) = ViewMvcFactory(layoutInflater)
+
+    @Provides
+    fun dialogsNavigator(fragmentManager: FragmentManager) = DialogsNavigator(fragmentManager)
+
+    @Provides
+    fun fetchQuestionUseCase(stackoverflowApi: StackoverflowApi) = FetchQuestionUseCase(stackoverflowApi)
+
+    @Provides
+    fun fetchQuestionDetailsUseCase(stackoverflowApi: StackoverflowApi) = FetchQuestionDetailsUseCase(stackoverflowApi)
 }
