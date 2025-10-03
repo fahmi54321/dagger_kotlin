@@ -1,6 +1,5 @@
-package com.techyourchance.dagger2course.common.dependencyinjection
+package com.techyourchance.dagger2course.common.dependencyinjection.presentation
 
-import com.techyourchance.dagger2course.networking.StackoverflowApi
 import com.techyourchance.dagger2course.questions.FetchQuestionDetailsUseCase
 import com.techyourchance.dagger2course.questions.FetchQuestionUseCase
 import com.techyourchance.dagger2course.screens.common.ScreensNavigator

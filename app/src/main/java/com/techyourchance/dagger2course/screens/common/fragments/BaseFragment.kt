@@ -1,10 +1,10 @@
 package com.techyourchance.dagger2course.screens.common.fragments
 
 import androidx.fragment.app.Fragment
-import com.techyourchance.dagger2course.common.dependencyinjection.DaggerActivityComponent
-import com.techyourchance.dagger2course.common.dependencyinjection.DaggerPresentationComponent
 import com.techyourchance.dagger2course.common.dependencyinjection.Injector
-import com.techyourchance.dagger2course.common.dependencyinjection.PresentationModule
+import com.techyourchance.dagger2course.common.dependencyinjection.activity.DaggerActivityComponent
+import com.techyourchance.dagger2course.common.dependencyinjection.presentation.DaggerPresentationComponent
+import com.techyourchance.dagger2course.common.dependencyinjection.presentation.PresentationModule
 import com.techyourchance.dagger2course.screens.common.activities.BaseActivity
 
 open class BaseFragment: Fragment() {
