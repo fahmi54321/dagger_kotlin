@@ -1,15 +1,23 @@
 package com.techyourchance.dagger2course.screens.common.fragments
 
 import androidx.fragment.app.Fragment
+import com.techyourchance.dagger2course.common.dependencyinjection.DaggerActivityComponent
 import com.techyourchance.dagger2course.common.dependencyinjection.DaggerPresentationComponent
 import com.techyourchance.dagger2course.common.dependencyinjection.Injector
 import com.techyourchance.dagger2course.common.dependencyinjection.PresentationModule
 import com.techyourchance.dagger2course.screens.common.activities.BaseActivity
 
 open class BaseFragment: Fragment() {
+
+    private val activityComponent by lazy {
+        DaggerActivityComponent.builder()
+            .activityModule((requireActivity() as BaseActivity).activityModule)
+            .build()
+
+    }
     val presentationComponent by lazy {
         DaggerPresentationComponent.builder()
-            .presentationModule(PresentationModule((requireActivity() as BaseActivity).activityCompositionRoot))
+            .presentationModule(PresentationModule(activityComponent))
             .build()
     }
     protected val injector get() = Injector(presentationComponent)
