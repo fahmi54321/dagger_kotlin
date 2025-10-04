@@ -1,7 +1,6 @@
 package com.techyourchance.dagger2course.screens.common.fragments
 
 import androidx.fragment.app.Fragment
-import com.techyourchance.dagger2course.common.dependencyinjection.Injector
 import com.techyourchance.dagger2course.common.dependencyinjection.activity.DaggerActivityComponent
 import com.techyourchance.dagger2course.common.dependencyinjection.presentation.DaggerPresentationComponent
 import com.techyourchance.dagger2course.common.dependencyinjection.presentation.PresentationModule
@@ -20,5 +19,5 @@ open class BaseFragment: Fragment() {
             .presentationModule(PresentationModule(activityComponent))
             .build()
     }
-    protected val injector get() = Injector(presentationComponent)
+    protected val injector get() = presentationComponent
 }

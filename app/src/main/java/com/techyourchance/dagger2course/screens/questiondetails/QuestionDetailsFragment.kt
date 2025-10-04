@@ -1,34 +1,17 @@
 package com.techyourchance.dagger2course.screens.questiondetails
 
-import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.techyourchance.dagger2course.Constants
-import com.techyourchance.dagger2course.MyApplication
-import com.techyourchance.dagger2course.R
-import com.techyourchance.dagger2course.common.dependencyinjection.Injector
-import com.techyourchance.dagger2course.common.dependencyinjection.Service
-import com.techyourchance.dagger2course.networking.StackoverflowApi
 import com.techyourchance.dagger2course.questions.FetchQuestionDetailsUseCase
 import com.techyourchance.dagger2course.screens.common.ScreensNavigator
-import com.techyourchance.dagger2course.screens.common.activities.BaseActivity
 import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
-import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.techyourchance.dagger2course.screens.common.fragments.BaseFragment
-import com.techyourchance.dagger2course.screens.common.toolbar.MyToolbar
 import com.techyourchance.dagger2course.screens.common.viewsmvc.ViewMvcFactory
 import com.techyourchance.dagger2course.screens.questiondetails.QuestionDetailsActivity.Companion.EXTRA_QUESTION_ID
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 class QuestionDetailsFragment : BaseFragment(), QuestionDetailsListMvc.Listener {
 
@@ -39,13 +22,13 @@ class QuestionDetailsFragment : BaseFragment(), QuestionDetailsListMvc.Listener 
 
     private lateinit var viewMvc: QuestionDetailsListMvc
 
-    @field:Service private lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
+    @Inject lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
 
-    @field:Service private lateinit var dialogsNavigator: DialogsNavigator
+    @Inject lateinit var dialogsNavigator: DialogsNavigator
 
-    @field:Service private lateinit var screensNavigator: ScreensNavigator
+    @Inject lateinit var screensNavigator: ScreensNavigator
 
-    @field:Service private lateinit var viewMvcFactory: ViewMvcFactory
+    @Inject lateinit var viewMvcFactory: ViewMvcFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
