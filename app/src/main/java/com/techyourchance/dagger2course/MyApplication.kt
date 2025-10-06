@@ -1,7 +1,7 @@
-package com.techyourchance.dagger2course
+package com.example.daggertwo
 
 import android.app.Application
-import com.techyourchance.dagger2course.common.dependencyinjection.app.AppModule
+import com.example.daggertwo.common.dependencyinjection.app.AppModule
 
 class MyApplication: Application() {
 

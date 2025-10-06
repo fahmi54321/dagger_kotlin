@@ -1,4 +1,4 @@
-package com.techyourchance.dagger2course.screens.questiondetails
+package com.example.daggertwo.screens.questiondetails
 
 import android.os.Build
 import android.text.Html
@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.techyourchance.dagger2course.R
-import com.techyourchance.dagger2course.screens.common.toolbar.MyToolbar
-import com.techyourchance.dagger2course.screens.common.viewsmvc.BaseViewMvc
+import com.example.daggertwo.R
+import com.example.daggertwo.screens.common.toolbar.MyToolbar
+import com.example.daggertwo.screens.common.viewsmvc.BaseViewMvc
 
 class QuestionDetailsListMvc(
     layoutInflater: LayoutInflater,

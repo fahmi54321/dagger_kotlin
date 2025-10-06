@@ -1,4 +1,4 @@
-package com.techyourchance.dagger2course.screens.questionslist
+package com.example.daggertwo.screens.questionslist
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.techyourchance.dagger2course.R
-import com.techyourchance.dagger2course.questions.Question
-import com.techyourchance.dagger2course.screens.common.viewsmvc.BaseViewMvc
+import com.example.daggertwo.R
+import com.example.daggertwo.questions.Question
+import com.example.daggertwo.screens.common.viewsmvc.BaseViewMvc
 import java.util.ArrayList
 
 class QuestionsListViewMvc(

@@ -1,6 +1,6 @@
-package com.techyourchance.dagger2course.networking
+package com.example.daggertwo.networking
 
 import com.google.gson.annotations.SerializedName
-import com.techyourchance.dagger2course.questions.Question
+import com.example.daggertwo.questions.Question
 
 class QuestionsListResponseSchema(@SerializedName("items") val questions: List<Question>)

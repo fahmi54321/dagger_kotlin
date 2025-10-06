@@ -1,13 +1,13 @@
-package com.techyourchance.dagger2course.screens.common.activities
+package com.example.daggertwo.screens.common.activities
 
 import androidx.appcompat.app.AppCompatActivity
-import com.techyourchance.dagger2course.MyApplication
-import com.techyourchance.dagger2course.common.dependencyinjection.activity.ActivityModule
-import com.techyourchance.dagger2course.common.dependencyinjection.app.AppModule
-import com.techyourchance.dagger2course.common.dependencyinjection.activity.DaggerActivityComponent
-import com.techyourchance.dagger2course.common.dependencyinjection.app.DaggerAppComponent
-import com.techyourchance.dagger2course.common.dependencyinjection.presentation.DaggerPresentationComponent
-import com.techyourchance.dagger2course.common.dependencyinjection.presentation.PresentationModule
+import com.example.daggertwo.MyApplication
+import com.example.daggertwo.common.dependencyinjection.activity.ActivityModule
+import com.example.daggertwo.common.dependencyinjection.app.AppModule
+import com.example.daggertwo.common.dependencyinjection.activity.DaggerActivityComponent
+import com.example.daggertwo.common.dependencyinjection.app.DaggerAppComponent
+import com.example.daggertwo.common.dependencyinjection.presentation.DaggerPresentationComponent
+import com.example.daggertwo.common.dependencyinjection.presentation.PresentationModule
 
 open class BaseActivity: AppCompatActivity() {
 
@@ -17,12 +17,13 @@ open class BaseActivity: AppCompatActivity() {
             .build()
     }
 
-    val activityModule by lazy {
-        ActivityModule(this, appComponent);
+    private val activityModule by lazy {
+        ActivityModule(this);
     }
 
-    private val activityComponent by lazy {
+    val activityComponent by lazy {
         DaggerActivityComponent.builder()
+            .appComponent(appComponent)
             .activityModule(activityModule)
             .build()
     }
@@ -30,7 +31,8 @@ open class BaseActivity: AppCompatActivity() {
 
     private val presentationComponent by lazy {
         DaggerPresentationComponent.builder()
-            .presentationModule(PresentationModule(activityComponent))
+            .activityComponent(activityComponent)
+            .presentationModule(PresentationModule())
             .build()
     }
     val injector get() = presentationComponent

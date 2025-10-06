@@ -1,4 +1,4 @@
-package com.techyourchance.dagger2course.screens.common.dialogs
+package com.example.daggertwo.screens.common.dialogs
 
 import androidx.fragment.app.FragmentManager
 

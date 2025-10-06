@@ -1,10 +1,10 @@
-package com.techyourchance.dagger2course.screens.common.dialogs
+package com.example.daggertwo.screens.common.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import com.techyourchance.dagger2course.R
+import com.example.daggertwo.R
 
 class ServerErrorDialogFragment : DialogFragment() {
 

@@ -1,30 +1,18 @@
-package com.techyourchance.dagger2course.common.dependencyinjection.presentation
+package com.example.daggertwo.common.dependencyinjection.presentation
 
 import android.view.LayoutInflater
 import androidx.fragment.app.FragmentManager
-import com.techyourchance.dagger2course.common.dependencyinjection.activity.ActivityComponent
-import com.techyourchance.dagger2course.networking.StackoverflowApi
-import com.techyourchance.dagger2course.questions.FetchQuestionDetailsUseCase
-import com.techyourchance.dagger2course.questions.FetchQuestionUseCase
-import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
-import com.techyourchance.dagger2course.screens.common.viewsmvc.ViewMvcFactory
+import com.example.daggertwo.common.dependencyinjection.activity.ActivityComponent
+import com.example.daggertwo.networking.StackoverflowApi
+import com.example.daggertwo.questions.FetchQuestionDetailsUseCase
+import com.example.daggertwo.questions.FetchQuestionUseCase
+import com.example.daggertwo.screens.common.dialogs.DialogsNavigator
+import com.example.daggertwo.screens.common.viewsmvc.ViewMvcFactory
 import dagger.Module
 import dagger.Provides
 
 @Module
-class PresentationModule(private val activityComponent: ActivityComponent) {
-
-    @Provides
-    fun layoutInflater() = activityComponent.layoutInflater()
-    @Provides
-    fun fragmentManager() = activityComponent.fragmentManager()
-    @Provides
-    fun stackoverflowApi() = activityComponent.stackoverflowApi()
-    @Provides
-    fun activity() = activityComponent.activity()
-
-    @Provides
-    fun screensNavigator() = activityComponent.screensNavigator()
+class PresentationModule {
 
     @Provides
     fun viewMvcFactory(layoutInflater: LayoutInflater) = ViewMvcFactory(layoutInflater)

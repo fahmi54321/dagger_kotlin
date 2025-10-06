@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    namespace "com.techyourchance.dagger2course"
+    namespace "com.example.daggertwo"
     compileSdk 34
     defaultConfig {
         minSdkVersion 19

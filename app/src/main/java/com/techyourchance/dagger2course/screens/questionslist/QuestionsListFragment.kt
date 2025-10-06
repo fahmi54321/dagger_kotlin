@@ -1,15 +1,15 @@
-package com.techyourchance.dagger2course.screens.questionslist
+package com.example.daggertwo.screens.questionslist
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.techyourchance.dagger2course.questions.FetchQuestionUseCase
-import com.techyourchance.dagger2course.questions.Question
-import com.techyourchance.dagger2course.screens.common.ScreensNavigator
-import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
-import com.techyourchance.dagger2course.screens.common.fragments.BaseFragment
-import com.techyourchance.dagger2course.screens.common.viewsmvc.ViewMvcFactory
+import com.example.daggertwo.questions.FetchQuestionUseCase
+import com.example.daggertwo.questions.Question
+import com.example.daggertwo.screens.common.ScreensNavigator
+import com.example.daggertwo.screens.common.dialogs.DialogsNavigator
+import com.example.daggertwo.screens.common.fragments.BaseFragment
+import com.example.daggertwo.screens.common.viewsmvc.ViewMvcFactory
 import kotlinx.coroutines.*
 import javax.inject.Inject
 

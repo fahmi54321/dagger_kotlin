@@ -1,8 +1,8 @@
-package com.techyourchance.dagger2course.common.dependencyinjection.app
+package com.example.daggertwo.common.dependencyinjection.app
 
 import android.app.Application
-import com.techyourchance.dagger2course.Constants
-import com.techyourchance.dagger2course.networking.StackoverflowApi
+import com.example.daggertwo.Constants
+import com.example.daggertwo.networking.StackoverflowApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

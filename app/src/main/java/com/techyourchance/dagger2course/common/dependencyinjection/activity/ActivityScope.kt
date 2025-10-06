@@ -1,4 +1,4 @@
-package com.techyourchance.dagger2course.common.dependencyinjection.activity
+package com.example.daggertwo.common.dependencyinjection.activity
 
 import javax.inject.Scope
 

@@ -1,7 +1,7 @@
-package com.techyourchance.dagger2course.questions
+package com.example.daggertwo.questions
 
-import com.techyourchance.dagger2course.Constants
-import com.techyourchance.dagger2course.networking.StackoverflowApi
+import com.example.daggertwo.Constants
+import com.example.daggertwo.networking.StackoverflowApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit

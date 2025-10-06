@@ -1,9 +1,9 @@
-package com.techyourchance.dagger2course.screens.common.viewsmvc
+package com.example.daggertwo.screens.common.viewsmvc
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.techyourchance.dagger2course.screens.questiondetails.QuestionDetailsListMvc
-import com.techyourchance.dagger2course.screens.questionslist.QuestionsListViewMvc
+import com.example.daggertwo.screens.questiondetails.QuestionDetailsListMvc
+import com.example.daggertwo.screens.questionslist.QuestionsListViewMvc
 
 class ViewMvcFactory(private val layoutInflater: LayoutInflater) {
     fun newQuestionsListViewMvc(parent: ViewGroup?): QuestionsListViewMvc{

@@ -1,4 +1,4 @@
-package com.techyourchance.dagger2course
+package com.example.daggertwo
 
 object Constants {
     const val BASE_URL = "https://api.stackexchange.com/2.2/"

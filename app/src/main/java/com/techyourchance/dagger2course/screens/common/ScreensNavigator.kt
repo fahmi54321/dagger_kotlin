@@ -1,8 +1,8 @@
-package com.techyourchance.dagger2course.screens.common
+package com.example.daggertwo.screens.common
 
 import android.app.Activity
 import android.content.Context
-import com.techyourchance.dagger2course.screens.questiondetails.QuestionDetailsActivity
+import com.example.daggertwo.screens.questiondetails.QuestionDetailsActivity
 
 class ScreensNavigator(private val actvity: Activity) {
 

@@ -1,4 +1,4 @@
-package com.techyourchance.dagger2course.screens.questiondetails
+package com.example.daggertwo.screens.questiondetails
 
 import android.content.Context
 import android.content.Intent
@@ -9,17 +9,17 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.techyourchance.dagger2course.Constants
-import com.techyourchance.dagger2course.MyApplication
-import com.techyourchance.dagger2course.R
-import com.techyourchance.dagger2course.networking.StackoverflowApi
-import com.techyourchance.dagger2course.questions.FetchQuestionDetailsUseCase
-import com.techyourchance.dagger2course.screens.common.ScreensNavigator
-import com.techyourchance.dagger2course.screens.common.activities.BaseActivity
-import com.techyourchance.dagger2course.screens.common.dialogs.DialogsNavigator
-import com.techyourchance.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
-import com.techyourchance.dagger2course.screens.common.toolbar.MyToolbar
-import com.techyourchance.dagger2course.screens.questionslist.QuestionsListFragment
+import com.example.daggertwo.Constants
+import com.example.daggertwo.MyApplication
+import com.example.daggertwo.R
+import com.example.daggertwo.networking.StackoverflowApi
+import com.example.daggertwo.questions.FetchQuestionDetailsUseCase
+import com.example.daggertwo.screens.common.ScreensNavigator
+import com.example.daggertwo.screens.common.activities.BaseActivity
+import com.example.daggertwo.screens.common.dialogs.DialogsNavigator
+import com.example.daggertwo.screens.common.dialogs.ServerErrorDialogFragment
+import com.example.daggertwo.screens.common.toolbar.MyToolbar
+import com.example.daggertwo.screens.questionslist.QuestionsListFragment
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
