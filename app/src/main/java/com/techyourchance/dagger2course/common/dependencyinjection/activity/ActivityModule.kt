@@ -2,7 +2,6 @@ package com.example.daggertwo.common.dependencyinjection.activity
 
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import com.example.daggertwo.common.dependencyinjection.app.AppComponent
 import com.example.daggertwo.screens.common.ScreensNavigator
 import dagger.Module
 import dagger.Provides
