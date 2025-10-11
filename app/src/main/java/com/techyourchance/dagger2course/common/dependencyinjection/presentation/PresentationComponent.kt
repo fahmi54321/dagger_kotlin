@@ -6,7 +6,7 @@ import com.example.daggertwo.screens.questionslist.QuestionsListFragment
 import dagger.Subcomponent
 
 @PresentationScope
-@Subcomponent(modules = [PresentationModule::class])
+@Subcomponent(modules = [PresentationModule::class, UseCaseModule::class])
 interface PresentationComponent {
     fun inject(fragment: QuestionsListFragment)
     fun inject(fragment: QuestionDetailsFragment)
