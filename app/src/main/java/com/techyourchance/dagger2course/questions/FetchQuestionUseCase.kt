@@ -6,9 +6,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
-class FetchQuestionUseCase(private val stackoverflowApi: StackoverflowApi) {
+class FetchQuestionUseCase @Inject constructor(private val stackoverflowApi: StackoverflowApi) {
     sealed class Result {
         data class Success(val questions: List<Question>) : Result()
         object Failure : Result()

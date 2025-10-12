@@ -14,10 +14,6 @@ class ActivityModule(
     @Provides
     fun activity() = activity
 
-    @ActivityScope
-    @Provides
-    fun screensNavigator() = ScreensNavigator(activity)
-
     @Provides
     fun fragmentManager() = activity.supportFragmentManager
 
