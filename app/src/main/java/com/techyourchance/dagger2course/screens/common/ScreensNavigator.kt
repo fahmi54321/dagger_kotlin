@@ -7,8 +7,7 @@ import com.example.daggertwo.common.dependencyinjection.activity.ActivityScope
 import com.example.daggertwo.screens.questiondetails.QuestionDetailsActivity
 import javax.inject.Inject
 
-@ActivityScope
-class ScreensNavigator @Inject constructor(private val actvity: AppCompatActivity) {
+class ScreensNavigator(private val actvity: AppCompatActivity) {
 
     fun navigateBack(){
         actvity.onBackPressed()
