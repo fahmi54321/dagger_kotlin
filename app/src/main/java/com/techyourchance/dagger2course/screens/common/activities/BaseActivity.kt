@@ -8,14 +8,9 @@ open class BaseActivity: AppCompatActivity() {
 
     private val appComponent get() = (application as MyApplication).appComponent
 
-    private val activityModule by lazy {
-        ActivityModule();
-    }
-
     val activityComponent by lazy {
         appComponent.newActivityComponentBuilder()
             .activity(this)
-            .activityModule(activityModule)
             .build()
     }
 

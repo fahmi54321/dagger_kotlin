@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.daggertwo.questions.FetchQuestionDetailsUseCase
 import com.example.daggertwo.screens.common.ScreensNavigator
+import com.example.daggertwo.screens.common.ScreensNavigatorImpl
 import com.example.daggertwo.screens.common.dialogs.DialogsNavigator
 import com.example.daggertwo.screens.common.fragments.BaseFragment
 import com.example.daggertwo.screens.common.viewsmvc.ViewMvcFactory
@@ -71,6 +72,7 @@ class QuestionDetailsFragment : BaseFragment(), QuestionDetailsListMvc.Listener 
                         viewMvc.bindQuesionBody(result.body)
                     }
                     is FetchQuestionDetailsUseCase.Result.Failure -> onFetchFailed()
+                    else -> {}
                 }
             } finally {
                 viewMvc.hideProgressIndication()
