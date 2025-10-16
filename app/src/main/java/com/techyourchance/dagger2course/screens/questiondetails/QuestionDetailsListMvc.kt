@@ -9,10 +9,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.daggertwo.R
 import com.example.daggertwo.screens.common.toolbar.MyToolbar
 import com.example.daggertwo.screens.common.viewsmvc.BaseViewMvc
+import com.techyourchance.dagger2course.screens.common.imageloader.ImageLoader
 
 class QuestionDetailsListMvc(
     layoutInflater: LayoutInflater,
-    viewGroup: ViewGroup?
+    viewGroup: ViewGroup?,
+    val imageLoader: ImageLoader,
 ): BaseViewMvc<QuestionDetailsListMvc.Listener>(
     layoutInflater,
     viewGroup,
@@ -58,5 +60,6 @@ class QuestionDetailsListMvc(
             @Suppress("DEPRECATION")
             txtQuestionBody.text = Html.fromHtml(questionBody)
         }
+
     }
 }

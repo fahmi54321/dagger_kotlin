@@ -4,14 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.daggertwo.screens.questiondetails.QuestionDetailsListMvc
 import com.example.daggertwo.screens.questionslist.QuestionsListViewMvc
+import com.techyourchance.dagger2course.screens.common.imageloader.ImageLoader
 import javax.inject.Inject
 
-class ViewMvcFactory @Inject constructor(private val layoutInflater: LayoutInflater) {
+class ViewMvcFactory @Inject constructor(
+    private val layoutInflater: LayoutInflater,
+    private val imageLoaderProvider: ImageLoader
+) {
     fun newQuestionsListViewMvc(parent: ViewGroup?): QuestionsListViewMvc{
         return QuestionsListViewMvc(layoutInflater, parent)
     }
 
     fun newQuestionDetailsListMvc(parent: ViewGroup?): QuestionDetailsListMvc{
-        return QuestionDetailsListMvc(layoutInflater, parent)
+        return QuestionDetailsListMvc(layoutInflater, parent, imageLoaderProvider)
     }
 }
