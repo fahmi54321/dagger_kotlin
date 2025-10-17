@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.daggertwo.questions.FetchQuestionDetailsUseCase
 import com.example.daggertwo.questions.FetchQuestionUseCase
 import com.example.daggertwo.questions.Question
 import kotlinx.coroutines.launch
@@ -12,7 +13,9 @@ import java.lang.RuntimeException
 import javax.inject.Inject
 import javax.inject.Provider
 
-class MyViewModel @Inject constructor(val fetchQuestionUseCase: FetchQuestionUseCase): ViewModel() {
+class MyViewModel @Inject constructor(
+    val fetchQuestionUseCase: FetchQuestionUseCase,
+): ViewModel() {
     private val _questions = MutableLiveData<List<Question>>()
     val question: LiveData<List<Question>> = _questions
 
@@ -27,9 +30,11 @@ class MyViewModel @Inject constructor(val fetchQuestionUseCase: FetchQuestionUse
         }
     }
 
-    class MyViewModelFactory @Inject constructor (val fetchQuestionUseCaseProvider: Provider<FetchQuestionUseCase>): ViewModelProvider.Factory{
+    class MyViewModelFactory @Inject constructor (
+        val myViewModelProvider: Provider<MyViewModel>
+    ): ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MyViewModel(fetchQuestionUseCaseProvider.get()) as T
+            return myViewModelProvider.get() as T
         }
     }
 }
