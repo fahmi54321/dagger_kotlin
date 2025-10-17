@@ -10,6 +10,13 @@
         android:layout_height="@dimen/toolbar_height"
         android:background="@color/colorPrimary"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/view_model"
+        android:id="@+id/btn_to_viewModel"/>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
