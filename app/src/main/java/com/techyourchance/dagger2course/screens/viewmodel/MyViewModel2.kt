@@ -13,20 +13,9 @@ import java.lang.RuntimeException
 import javax.inject.Inject
 import javax.inject.Provider
 
-class MyViewModel @Inject constructor(
+class MyViewModel2 @Inject constructor(
     val fetchQuestionUseCase: FetchQuestionUseCase,
 ): ViewModel() {
     private val _questions = MutableLiveData<List<Question>>()
     val question: LiveData<List<Question>> = _questions
-
-    init {
-        viewModelScope.launch {
-            val result = fetchQuestionUseCase.fetchLatestQuestions()
-            if(result is FetchQuestionUseCase.Result.Success){
-                _questions.value = result.questions
-            }else{
-                throw RuntimeException("fetch failed")
-            }
-        }
-    }
 }

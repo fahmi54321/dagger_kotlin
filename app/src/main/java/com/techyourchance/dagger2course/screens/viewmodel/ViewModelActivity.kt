@@ -22,9 +22,10 @@ class ViewModelActivity : BaseActivity() {
     private lateinit var toolbar: MyToolbar
 
     @Inject
-    lateinit var myViewModelFactory: MyViewModel.MyViewModelFactory
+    lateinit var myViewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: MyViewModel
+    private lateinit var viewModel2: MyViewModel2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injector.inject(this)
@@ -37,6 +38,7 @@ class ViewModelActivity : BaseActivity() {
         }
 
         viewModel = ViewModelProvider(this, myViewModelFactory).get(MyViewModel::class.java)
+        viewModel2 = ViewModelProvider(this, myViewModelFactory).get(MyViewModel2::class.java)
 
         viewModel.question.observe(this, Observer {question->
             Toast.makeText(this,"fetched ${question.size}",Toast.LENGTH_SHORT).show()
