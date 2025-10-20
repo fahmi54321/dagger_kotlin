@@ -8,24 +8,19 @@ import com.example.daggertwo.questions.FetchQuestionDetailsUseCase
 import com.example.daggertwo.questions.FetchQuestionUseCase
 import javax.inject.Inject
 import javax.inject.Provider
+import kotlin.reflect.KClass
 
 class ViewModelFactory @Inject constructor (
-    val fetchQuestionUseCaseProvider: Provider<FetchQuestionUseCase>,
-    val fetchQuestionDetailsUseCaseProvider: Provider<FetchQuestionDetailsUseCase>,
+    val providers: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ): ViewModelProvider.Factory{
 
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
         val savedStateHandle = extras.createSavedStateHandle()
-        return when(modelClass){
-            MyViewModel::class.java-> MyViewModel(
-                fetchQuestionUseCaseProvider.get(),
-                fetchQuestionDetailsUseCaseProvider.get(),
-                savedStateHandle,
-            ) as T
-            MyViewModel2::class.java -> MyViewModel2(
-                fetchQuestionUseCaseProvider.get()
-            ) as T
-            else -> throw RuntimeException("unsupported viewmodel type: $modelClass")
+        val provider = providers[modelClass]
+        val viewModel = provider?.get() ?: throw RuntimeException("unsupported viewmodel type: $modelClass")
+        if (viewModel is SavedStateViewModel) {
+            viewModel.init(savedStateHandle)
         }
+        return viewModel as T
     }
 }

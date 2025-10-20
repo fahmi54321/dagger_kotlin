@@ -19,12 +19,13 @@ import kotlin.time.Duration
 class MyViewModel @Inject constructor(
     val fetchQuestionUseCase: FetchQuestionUseCase,
     val fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase,
-    val savedStateHandle: SavedStateHandle
-): ViewModel() {
-    private val _questions : MutableLiveData<List<Question>> = savedStateHandle.getLiveData("questions", emptyList())
-    val question: LiveData<List<Question>> = _questions
+): SavedStateViewModel() {
+    private lateinit var _questions : MutableLiveData<List<Question>>
+    val question: LiveData<List<Question>> get() = _questions
 
-    init {
+    override fun init(savedStateHandle: SavedStateHandle) {
+        _questions = savedStateHandle.getLiveData("questions", emptyList())
+
         viewModelScope.launch {
             delay(5000)
             val result = fetchQuestionUseCase.fetchLatestQuestions()
