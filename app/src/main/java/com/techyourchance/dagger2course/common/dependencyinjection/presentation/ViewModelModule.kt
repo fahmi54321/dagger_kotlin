@@ -1,6 +1,7 @@
 package com.techyourchance.dagger2course.common.dependencyinjection.presentation
 
 import androidx.lifecycle.ViewModel
+import com.techyourchance.dagger2course.screens.questionslistviewmodel.QuestionsListViewModel
 import com.techyourchance.dagger2course.screens.viewmodel.MyViewModel
 import com.techyourchance.dagger2course.screens.viewmodel.MyViewModel2
 import dagger.Binds
@@ -19,4 +20,9 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(MyViewModel2::class)
     abstract fun myViewModel2(myViewModel2: MyViewModel2) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(QuestionsListViewModel::class)
+    abstract fun questionsListViewModel(questionsListViewModel: QuestionsListViewModel) : ViewModel
 }
