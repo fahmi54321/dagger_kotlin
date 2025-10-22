@@ -12,8 +12,11 @@ import com.example.daggertwo.R
 import com.example.daggertwo.screens.common.ScreensNavigator
 import com.example.daggertwo.screens.common.activities.BaseActivity
 import com.example.daggertwo.screens.common.toolbar.MyToolbar
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ViewModelActivity : BaseActivity() {
 
     @Inject
@@ -28,7 +31,6 @@ class ViewModelActivity : BaseActivity() {
     private lateinit var viewModel2: MyViewModel2
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injector.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_model)
 

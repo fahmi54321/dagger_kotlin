@@ -11,9 +11,11 @@ import com.example.daggertwo.screens.common.dialogs.DialogsNavigator
 import com.example.daggertwo.screens.common.fragments.BaseFragment
 import com.example.daggertwo.screens.common.viewsmvc.ViewMvcFactory
 import com.example.daggertwo.screens.questiondetails.QuestionDetailsActivity.Companion.EXTRA_QUESTION_ID
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class QuestionDetailsFragment : BaseFragment(), QuestionDetailsListMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -37,7 +39,6 @@ class QuestionDetailsFragment : BaseFragment(), QuestionDetailsListMvc.Listener 
         // retrieve question ID passed from outside
         questionId = requireActivity().intent.extras!!.getString(EXTRA_QUESTION_ID)!!
 
-        injector.inject(this)
     }
 
     override fun onCreateView(

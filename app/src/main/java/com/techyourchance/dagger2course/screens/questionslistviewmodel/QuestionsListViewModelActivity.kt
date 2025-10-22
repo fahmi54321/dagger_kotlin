@@ -10,6 +10,8 @@ import com.example.daggertwo.screens.common.activities.BaseActivity
 import com.example.daggertwo.screens.common.dialogs.DialogsNavigator
 import com.example.daggertwo.screens.common.viewsmvc.ViewMvcFactory
 import com.techyourchance.dagger2course.screens.viewmodel.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -17,6 +19,7 @@ import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class QuestionsListViewModelActivity : BaseActivity(),QuestionsListView.Listener {
 
     private lateinit var viewMvc: QuestionsListView
@@ -37,7 +40,6 @@ class QuestionsListViewModelActivity : BaseActivity(),QuestionsListView.Listener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        injector.inject(this)
         viewMvc = viewMvcFactory.newQuestionsListView(null)
         setContentView(viewMvc.rootView)
 
