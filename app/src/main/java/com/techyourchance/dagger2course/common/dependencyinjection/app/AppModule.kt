@@ -1,19 +1,19 @@
 package com.example.daggertwo.common.dependencyinjection.app
 
-import android.app.Application
-import com.example.daggertwo.Constants
 import com.example.daggertwo.networking.StackoverflowApi
 import com.techyourchance.dagger2course.common.dependencyinjection.Retrofit1
 import com.techyourchance.dagger2course.common.dependencyinjection.Retrofit2
 import com.techyourchance.dagger2course.networking.UrlProvider
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 
 @Module
-class AppModule(val application: Application) {
+@InstallIn(SingletonComponent::class)
+class AppModule {
 
     @Provides
     @AppScope
@@ -42,7 +42,4 @@ class AppModule(val application: Application) {
     @Provides
     @AppScope
     fun stackoverflowApi(@Retrofit1 retrofit: Retrofit) = retrofit.create(StackoverflowApi::class.java)
-
-    @Provides
-    fun application() = application
 }
