@@ -2,21 +2,13 @@ package com.techyourchance.dagger2course.screens.questionslistviewmodel
 
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.example.daggertwo.R
 import com.example.daggertwo.questions.FetchQuestionUseCase
 import com.example.daggertwo.questions.Question
 import com.example.daggertwo.screens.common.ScreensNavigator
 import com.example.daggertwo.screens.common.activities.BaseActivity
 import com.example.daggertwo.screens.common.dialogs.DialogsNavigator
 import com.example.daggertwo.screens.common.viewsmvc.ViewMvcFactory
-import com.techyourchance.dagger2course.screens.viewmodel.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancelChildren
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,8 +27,6 @@ class QuestionsListViewModelActivity : BaseActivity(),QuestionsListView.Listener
     lateinit var screensNavigator: ScreensNavigator
     @Inject
     lateinit var viewMvcFactory: ViewMvcFactory
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +38,7 @@ class QuestionsListViewModelActivity : BaseActivity(),QuestionsListView.Listener
     }
 
     private fun initViewModel(){
-        viewModelQuestionsList = ViewModelProvider(this,viewModelFactory).get(QuestionsListViewModel::class.java)
+        viewModelQuestionsList = ViewModelProvider(this).get(QuestionsListViewModel::class.java)
     }
 
     private fun observer(){

@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.daggertwo.R
 import com.example.daggertwo.screens.common.activities.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class QuestionDetailsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

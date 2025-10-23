@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.example.daggertwo.questions.FetchQuestionUseCase
 import com.example.daggertwo.questions.Question
 import com.example.daggertwo.screens.common.ScreensNavigator
-import com.example.daggertwo.screens.common.ScreensNavigatorImpl
 import com.example.daggertwo.screens.common.dialogs.DialogsNavigator
 import com.example.daggertwo.screens.common.fragments.BaseFragment
 import com.example.daggertwo.screens.common.viewsmvc.ViewMvcFactory

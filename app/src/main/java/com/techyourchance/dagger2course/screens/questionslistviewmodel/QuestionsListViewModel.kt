@@ -2,9 +2,10 @@ package com.techyourchance.dagger2course.screens.questionslistviewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import com.example.daggertwo.questions.FetchQuestionUseCase
 import com.example.daggertwo.questions.Question
-import com.techyourchance.dagger2course.screens.viewmodel.SavedStateViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -12,13 +13,15 @@ import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class QuestionsListViewModel @Inject constructor(
-    val fetchQuestionUseCase: FetchQuestionUseCase
-) : SavedStateViewModel() {
+    private val fetchQuestionUseCase: FetchQuestionUseCase,
+    private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    private lateinit var _question: MutableLiveData<List<Question>>
+    private var _question: MutableLiveData<List<Question>> = savedStateHandle.getLiveData("questions", emptyList())
     private val _showProgressIndication: MutableLiveData<Boolean> = MutableLiveData(false)
     private val _hideProgressIndication: MutableLiveData<Boolean> = MutableLiveData(false)
     private val _isDataLoaded: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -29,12 +32,6 @@ class QuestionsListViewModel @Inject constructor(
     val hideProgressIndication get() = _hideProgressIndication
     val isDataLoaded get() = _isDataLoaded
     val isFetchFailed get() = _isFetchFailed
-
-
-
-    override fun init(savedStateHandle: SavedStateHandle) {
-        _question = savedStateHandle.getLiveData("questions", emptyList())
-    }
 
     fun fetchQuestion(){
         coroutineScope.launch {

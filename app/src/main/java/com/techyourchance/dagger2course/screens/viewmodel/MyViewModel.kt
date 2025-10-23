@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.daggertwo.questions.FetchQuestionDetailsUseCase
 import com.example.daggertwo.questions.FetchQuestionUseCase
 import com.example.daggertwo.questions.Question
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.RuntimeException
@@ -16,16 +17,16 @@ import javax.inject.Inject
 import javax.inject.Provider
 import kotlin.time.Duration
 
+@HiltViewModel
 class MyViewModel @Inject constructor(
-    val fetchQuestionUseCase: FetchQuestionUseCase,
-    val fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase,
-): SavedStateViewModel() {
-    private lateinit var _questions : MutableLiveData<List<Question>>
+    private val fetchQuestionUseCase: FetchQuestionUseCase,
+    private val fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase,
+    private val savedStateHandle: SavedStateHandle
+): ViewModel() {
+    private var _questions : MutableLiveData<List<Question>> = savedStateHandle.getLiveData("questions", emptyList())
     val question: LiveData<List<Question>> get() = _questions
 
-    override fun init(savedStateHandle: SavedStateHandle) {
-        _questions = savedStateHandle.getLiveData("questions", emptyList())
-
+    init{
         viewModelScope.launch {
             delay(5000)
             val result = fetchQuestionUseCase.fetchLatestQuestions()
