@@ -1,7 +1,6 @@
 package com.example.daggertwo.screens.common
 
 import androidx.appcompat.app.AppCompatActivity
-import com.example.daggertwo.common.dependencyinjection.activity.ActivityScope
 import com.example.daggertwo.screens.questiondetails.QuestionDetailsActivity
 import com.techyourchance.dagger2course.screens.viewmodel.ViewModelActivity
 import javax.inject.Inject
